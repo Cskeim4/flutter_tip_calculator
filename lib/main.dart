@@ -88,9 +88,9 @@ class _MyHomePageState extends State<MyHomePage> {
               'Tip Calculator',
               //Increase the font size of the text and change the color
               style: Theme.of(context).textTheme.headline4,
-              style: TextStyle(
-                color: Colors.cyan,
-              ),
+              //style: TextStyle(
+                //color: Colors.cyan,
+              //),
 
               ),
             Text(
