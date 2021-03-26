@@ -33,6 +33,7 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
+//Our code goes here
 class _MyHomePageState extends State<MyHomePage> {
   // int _counter = 0;
   //
@@ -45,22 +46,14 @@ class _MyHomePageState extends State<MyHomePage> {
   //   });
   // }
 
-  //Declare and Initialize textField Controllers, connection to the widgets
+  //Declare and Initialize textField Controller, connection to the widget
   final billTextField = TextEditingController();
-
 
   //Local Variables to determine the tip and total bill
   bool isSwitched = false;
   double _amount = 0;
   double _tipPercent = 0;
   double _totalTip = 0;
-
-
-  //Method to Calculate the tip amount
-  //This method takes in the tip percentage as a parameter
-  // void _calculateTip(double _tipPercent){
-  //
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -83,13 +76,13 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             Text(
               'Tip Calculator',
-              //Increase the font size of the text and change the color
+              //Increase the font size of the text
               style: Theme.of(context).textTheme.headline4,
                //TextStyle(
                 //color: Colors.cyan,
               //),
-
               ),
+            SizedBox(height: 50),
             Text(
               'Bill Amount:',
             ),
@@ -99,6 +92,7 @@ class _MyHomePageState extends State<MyHomePage> {
             Row(
               children: [
                 Switch(
+                  //Set up the switch button
                     value: isSwitched,
                     onChanged: (value){
                       setState(() {
@@ -113,24 +107,23 @@ class _MyHomePageState extends State<MyHomePage> {
             ElevatedButton(
                 onPressed: (){
                   setState(() {
+                    //Set the amount to the number entered in the controller
                     _amount = double.parse(billTextField.text);
-
+                    //Determine the tip percentage
                   if(isSwitched == true){
                     _tipPercent = .20;
                   }
                   else{
                     _tipPercent = .15;
                   }
-
+                  //Calculate the top tip
                     _totalTip = _amount * _tipPercent;
 
                   });
 
-                  //Call the calculate tip method and send in the tip percentage
-                  //_calculateTip(_tipPercent);
                 },
                 child: Text("Calculate Tip")),
-            SizedBox(height: 100),
+            SizedBox(height: 50),
             Text(
               'Total Tip: $_totalTip'
             ),
