@@ -47,7 +47,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   //Declare and Initialize textField Controllers, connection to the widgets
   final billTextField = TextEditingController();
-  final totalTextField = TextEditingController();
+
 
   //Local Variables to determine the tip and total bill
   bool isSwitched = false;
@@ -58,12 +58,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
   //Method to Calculate the tip amount
   //This method takes in the tip percentage as a parameter
-  void _calculateTip(double _tipPercent){
-    setState(() {
-        _totalTip = _amount * _tipPercent;
-        totalTextField.text = _totalTip.toStringAsFixed(2);
-    });
-  }
+  // void _calculateTip(double _tipPercent){
+  //
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -88,7 +85,7 @@ class _MyHomePageState extends State<MyHomePage> {
               'Tip Calculator',
               //Increase the font size of the text and change the color
               style: Theme.of(context).textTheme.headline4,
-              //style: TextStyle(
+               //TextStyle(
                 //color: Colors.cyan,
               //),
 
@@ -99,34 +96,44 @@ class _MyHomePageState extends State<MyHomePage> {
             TextField(
               controller: billTextField,
             ),
-            Switch(
-                value: isSwitched,
-                onChanged: (value){
-                  setState(() {
-                    isSwitched = value;
-                    print(isSwitched);
-                  });
-                }
+            Row(
+              children: [
+                Switch(
+                    value: isSwitched,
+                    onChanged: (value){
+                      setState(() {
+                        isSwitched = value;
+                        print(isSwitched);
+                      });
+                    }
+                ),
+                Text("Great Service?"),
+              ],
             ),
             ElevatedButton(
                 onPressed: (){
-                  if(isSwitched = true){
+                  setState(() {
+                    _amount = double.parse(billTextField.text);
+
+                  if(isSwitched == true){
                     _tipPercent = .20;
                   }
                   else{
                     _tipPercent = .15;
                   }
+
+                    _totalTip = _amount * _tipPercent;
+
+                  });
+
                   //Call the calculate tip method and send in the tip percentage
-                  _calculateTip(_tipPercent);
+                  //_calculateTip(_tipPercent);
                 },
                 child: Text("Calculate Tip")),
+            SizedBox(height: 100),
             Text(
-              'Total Tip:'
+              'Total Tip: $_totalTip'
             ),
-            TextField(
-              //Display the total tip for the bill amount entered
-              controller: totalTextField,
-            )
 
           ],
         ),
